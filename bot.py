@@ -267,7 +267,7 @@ async def auto_reply_targets(event):
     last_reply_time[key] = now
 
 async def main():
-    await client.start()  # без input, потому что сессия уже есть
+    await client.start(phone='+79086468930')  # передаём номер телефона явно
     print("бот запущен и подключён")
     await client.run_until_disconnected()
 
