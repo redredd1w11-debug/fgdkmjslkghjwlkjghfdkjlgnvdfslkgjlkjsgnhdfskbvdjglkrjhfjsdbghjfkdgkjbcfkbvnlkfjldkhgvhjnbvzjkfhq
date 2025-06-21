@@ -6,16 +6,12 @@ import aiofiles
 import random
 import io
 from telethon import TelegramClient, events
-from telethon.errors.rpcerrorlist import (
-    UsernameNotOccupiedError,
-    UsernameInvalidError,
-    PeerIdInvalidError,
-)
 
 api_id = 28135093
 api_hash = "f1abba5a1346741d35084fd2621860f2"
+session_name = "dake_session"
 
-client = TelegramClient("dake_session", api_id, api_hash)
+client = TelegramClient(session_name, api_id, api_hash)
 
 HELP_TEXT = """dake v2 
 ==========================
@@ -34,7 +30,6 @@ HELP_TEXT = """dake v2
 ==========================
 soft by @BloodyCircletov // Купить софт там же"""
 
-# обновлённый рабочий URL help-image
 HELP_IMAGE_URL = "https://i.postimg.cc/c1Qx7S32/1000049329.jpg"
 TEMPLATES_DIR = "templates"
 TEMPLATES_FILE = os.path.join(TEMPLATES_DIR, "templates.txt")
@@ -185,7 +180,6 @@ async def commands_handler(event):
         if not user:
             await event.edit("пользователь не найден")
             return
-        # определяем отображаемое имя: username или имя/фамилия
         display_name = user.username if getattr(user, 'username', None) else f"{user.first_name or ''}{(' ' + user.last_name) if getattr(user, 'last_name', None) else ''}".strip()
         if not display_name:
             display_name = str(user.id)
@@ -225,7 +219,7 @@ async def commands_handler(event):
     elif cmd == "dclear":
         dh_tasks.pop(cid, None)
         auto_targets.pop(cid, None)
-        await event.edit("все цели и задачи очищены")
+        await event.edit("все цели и задачи зачищены")
 
     elif cmd == "dh":
         if len(args) < 4:
@@ -273,8 +267,8 @@ async def auto_reply_targets(event):
     last_reply_time[key] = now
 
 async def main():
-    await client.start()
-    print("бот запущен")
+    await client.start()  # без input, потому что сессия уже есть
+    print("бот запущен и подключён")
     await client.run_until_disconnected()
 
 if __name__ == "__main__":
