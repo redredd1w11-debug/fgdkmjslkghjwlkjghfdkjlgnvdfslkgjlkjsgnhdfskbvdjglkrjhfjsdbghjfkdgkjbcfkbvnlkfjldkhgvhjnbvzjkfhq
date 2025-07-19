@@ -1,0 +1,48 @@
+var hwid = pfc.getHWID();
+var base = pfc.readURL("https://raw.githubusercontent.com/redredd1w11-debug/shardov/main/base.txt");
+if (!base.contains(hwid)) {
+    pfc.log("Unauthorized user. Script stopped.");
+    pfc.exit();
+}
+
+// Основной цикл
+var CREEPERSCRIPT = Time.getMillis();
+pfc.startScreenCapture(2);
+pfc.setOCRLang("eng");
+
+while (!EXIT) {
+    if (pfc.getColor(CRE) == CGAL) {
+        pfc.click(CRE);
+        pfc.sleep(300);
+    }
+    if (pfc.getColor(CR) == COSM) {
+        pfc.click(CR);
+        pfc.sleep(500);
+    }
+    if (pfc.getColor(C) == COK) {
+        pfc.click(C);
+    }
+    try {
+        var text = pfc.getText(CREEP, CREE);
+        var price = (text.isEmpty() ? 0 : Float.parseFloat(text));
+        if (pfc.getColor(CREEPER) < 11111111 && price <= CENA) {
+            pfc.click(CREEPER);
+            pfc.sleep(osm);
+            pfc.click(CREEPE);
+            pfc.click(CREEPE);
+            pfc.click(CREEPE);
+            pfc.sleep(2);
+            pfc.click(SUBSCRIBE);
+            pfc.sleep(150);
+            pfc.click(CRE);
+            pfc.sleep(20);
+            pfc.click(CRE);
+        }
+    } catch (e) {}
+    if ((Time.getMillis() - CREEPERSCRIPT) > 15000) {
+        CREEPERSCRIPT = Time.getMillis();
+        pfc.click(CRE);
+        pfc.sleep(20);
+        pfc.click(CRE);
+    }
+}
